@@ -1,17 +1,28 @@
 <?php
 
-namespace SimpleFactory\Tests;
+namespace Tests;
 
-use SimpleFactory\SimpleFactory;
-require __DIR__ . '/../Bicycle.php';
-require __DIR__ . '/../SimpleFactory.php';
+use SimpleFactory;
 
+spl_autoload_register(function ($class) {
+    include __DIR__ . '/../' . $class . '.php';
+});
+
+/**
+ * Class SimpleFactoryTest
+ * @package Tests
+ */
 class SimpleFactoryTest
 {
+    /**
+     * Test Simple Factory
+     */
     public function testCanCreateBicycle()
     {
         $bicycle = (new SimpleFactory())->createBicycle();
         die(print_r($bicycle));
     }
 }
+
+// Run test.
 (new SimpleFactoryTest())->testCanCreateBicycle();
